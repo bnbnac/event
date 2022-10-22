@@ -9,8 +9,14 @@ const Container = styled.div`
   margin: 30px;
   padding: 30px;
 `;
+const Head = styled.h1`
+  font-size: 30px;
+`;
 
 function App() {
+  const [added, setAdded] = useState([]);
+  const [range, setRange] = useState({});
+
   const run = () => {
     let i = 0;
     let j = 0;
@@ -18,8 +24,15 @@ function App() {
     let k = 0;
     let l = 0;
     const visited = [];
-    const user = 300000;
-    const expected = 350000;
+    const answer = [];
+    let user = 0;
+    added.map((e) => {
+      user += parseInt(range[e].popul);
+    });
+    let expected = 0;
+    added.map((e) => {
+      expected = Math.max(expected, parseInt(range[e].high));
+    });
 
     // generate Array length with expected
     // to check picked number
@@ -53,14 +66,15 @@ function App() {
     while (m < expected) {
       if (visited[m] === 0) {
         // avoid zero
-        console.log(m + 1);
+        answer.push(m + 1);
       }
       m += 1;
     }
+    console.log(answer);
+    return answer;
   };
 
-  const prerun = () => {};
-
+  const [luck, setLuck] = useState();
   return (
     <Container>
       <form
@@ -71,14 +85,31 @@ function App() {
         <Form title={"회차 수"} />
         <div>회차당 티켓 수 15</div>
         <div>-----------------</div>
-        <Add />
+        <Add
+          added={added}
+          setAdded={setAdded}
+          range={range}
+          setRange={setRange}
+        />
         <div>-----------------</div>
         <div>
-          <Btn onClick={() => prerun()}>Run</Btn>
+          <Btn
+            style={{ color: "red", fontSize: "40px" }}
+            onClick={() => setLuck(run())}
+          >
+            Run
+          </Btn>
         </div>
       </form>
       <div>-----------------</div>
-      <h2>당첨번호 over?</h2>
+      <Head>당첨번호</Head>
+      <Head style={{ color: "blue" }}>
+        {luck.toString() ? luck[0] : "Max Over"}
+      </Head>
+      <Head>보다 작은 번호 중 비어있는 번호 (max:{})</Head>
+      <Head style={{ color: "green" }}>
+        {luck.toString() ? luck.toString() : "다 찼습니다."}
+      </Head>
     </Container>
   );
 }

@@ -17,17 +17,14 @@ function Range({ setRange, el, range }) {
   const low = (event) => {
     const val = event.target.value;
     setRange((prev) => ({ ...prev, [el]: { ...prev[el], low: val } }));
-    console.log(range);
   };
   const high = (event) => {
     const val = event.target.value;
     setRange((prev) => ({ ...prev, [el]: { ...prev[el], high: val } }));
-    console.log(range);
   };
   const pop = (event) => {
     const val = event.target.value;
     setRange((prev) => ({ ...prev, [el]: { ...prev[el], popul: val } }));
-    console.log(range);
   };
 
   return (

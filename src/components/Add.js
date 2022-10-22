@@ -21,19 +21,18 @@ const Row = styled.div`
   /* display: flex; */
   align-items: center;
   padding-bottom: 10px;
-  background-color: lightpink;
+  /* background-color: lightpink; */
 `;
 const Column = styled.div`
   display: flex;
 `;
+const Head = styled.h3`
+  font-family: Arial, Helvetica, sans-serif;
+`;
 
 // let added = [];
 
-function Add() {
-  let [added, setAdded] = useState([]);
-
-  const [range, setRange] = useState({});
-
+function Add({ added, setAdded, range, setRange }) {
   const handleAdd = () => {
     const now = Date.now();
     const nowString = now.toString();
@@ -67,13 +66,17 @@ function Add() {
   return (
     <Container>
       <Top>
-        <h3>TOTAL : {total}명</h3>
+        <Row>
+          <Head>Max : {}</Head>
+          <Head>TOTAL : {total}명</Head>
+        </Row>
         <Btn onClick={() => handleAdd()}>범위추가</Btn>
       </Top>
       <Row id="add">
         {added.map((el) => {
           return (
             <div key={el}>
+              <>-------------------------------------------------</>
               <Column id={el}>
                 <Range setRange={setRange} el={el} range={range}></Range>
                 <Btn onClick={(event) => handleDelete(event)}>x</Btn>
