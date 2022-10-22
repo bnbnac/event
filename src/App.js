@@ -68,8 +68,7 @@ function App() {
         <Btn onClick={() => run()}>Run</Btn>
       </h2>
       <h2>-----------------</h2>
-      <h2>당첨번호</h2>
-      <h2>비어있는 번호</h2>
+      <h2>당첨번호 over?</h2>
     </Container>
   );
 }
