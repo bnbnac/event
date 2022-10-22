@@ -8,8 +8,8 @@ const Container = styled.div`
 `;
 const Input = styled.input`
   color: black;
-  height: 40px;
   margin: 30px;
+  width: 300px;
 `;
 
 function Form({ title }) {
@@ -17,7 +17,7 @@ function Form({ title }) {
     <Container>
       <h1>{title}</h1>
       <Input
-        placeholder={title}
+        placeholder={"회차수는 어려워서 구현안함 ^^~"}
         onChange={(e) => localStorage.setItem("cyclic", e.target.value)}
       />
     </Container>

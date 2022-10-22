@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 const Head = styled.h1`
   font-size: 30px;
+  word-break: break-all;
 `;
 
 function App() {
@@ -23,50 +24,57 @@ function App() {
     let m = 0;
     let k = 0;
     let l = 0;
-    const visited = [];
+    let x = 0;
+    let z = 0;
+    const visited = [1];
     const answer = [];
-    let user = 0;
-    added.map((e) => {
-      user += parseInt(range[e].popul);
-    });
-    let expected = 0;
-    added.map((e) => {
-      expected = Math.max(expected, parseInt(range[e].high));
-    });
-
-    // generate Array length with expected
-    // to check picked number
-    while (i < expected) {
+    while (i < 9999999) {
       visited.push(0);
       i += 1;
     }
 
-    while (j < user) {
-      k = 0;
-      l = 0;
-      const pick = [];
+    // let user = 0;
+    let maxi = 0;
+    let id = "";
+    let pick = [];
+    const leng = added.length;
+    while (z < leng) {
+      j = 0;
+      id = added[z];
 
-      // j-th user pick 15 numbers without repeat
-      while (k < 15) {
-        const now = Math.round(Math.random() * expected);
-        if (!pick.includes(now)) {
-          pick.push(now);
-          k += 1;
+      const user = parseInt(range[id].popul);
+      const high = parseInt(range[id].high);
+      const low = parseInt(range[id].low);
+
+      while (j < user) {
+        k = 0;
+        l = 0;
+        pick = [];
+        // j-th user pick 15 numbers without repeat
+        while (k < 15) {
+          const now = Math.floor(Math.random() * (high - low) + low + 1);
+          if (!pick.includes(now)) {
+            pick.push(now);
+            k += 1;
+          }
         }
+        // j-th user visit his picked number
+        while (l < 15) {
+          visited[pick[l]] = 1;
+          l += 1;
+        }
+        j += 1;
       }
-      // j-th user visit his picked number
-      while (l < 15) {
-        visited[pick[l]] = 1;
-        l += 1;
-      }
-      j += 1;
+      maxi = Math.max(maxi, high);
+      z += 1;
     }
+
     // console unvisited idx
     console.log("unvisitied");
-    while (m < expected) {
+    while (m <= maxi && x < 50) {
       if (visited[m] === 0) {
-        // avoid zero
-        answer.push(m + 1);
+        answer.push(m);
+        x += 1;
       }
       m += 1;
     }
@@ -82,7 +90,7 @@ function App() {
           e.preventDefault();
         }}
       >
-        <Form title={"회차 수"} />
+        <Form title={"회차 수(default 1)"} />
         <div>회차당 티켓 수 15</div>
         <div>-----------------</div>
         <Add
@@ -104,11 +112,11 @@ function App() {
       <div>-----------------</div>
       <Head>당첨번호</Head>
       <Head style={{ color: "blue" }}>
-        {luck.toString() ? luck[0] : "Max Over"}
+        {luck ? (luck.toString ? luck[0] : "Max Over") : ""}
       </Head>
-      <Head>보다 작은 번호 중 비어있는 번호 (max:{})</Head>
+      <Head> max보다 작은 번호 중 뽑히지 않은 번호(하위 50개까지만 표시)</Head>
       <Head style={{ color: "green" }}>
-        {luck.toString() ? luck.toString() : "다 찼습니다."}
+        {luck ? (luck.toString() ? luck.toString() : "다 찼습니다.") : ""}
       </Head>
     </Container>
   );

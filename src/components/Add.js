@@ -54,12 +54,19 @@ function Add({ added, setAdded, range, setRange }) {
   };
 
   const [total, setTotal] = useState(0);
+  const [max, setMax] = useState(0);
   let sum = 0;
+  let lar = 0;
   useEffect(() => {
     sum = 0;
+    lar = 0;
     added.map((e) => {
       sum += parseInt(range[e].popul);
       setTotal(sum);
+    });
+    added.map((e) => {
+      lar = Math.max(lar, parseInt(range[e].high));
+      setMax(lar);
     });
   }, [range]);
 
@@ -67,11 +74,16 @@ function Add({ added, setAdded, range, setRange }) {
     <Container>
       <Top>
         <Row>
-          <Head>Max : {}</Head>
+          <Head>Range Max : {max}</Head>
           <Head>TOTAL : {total}명</Head>
         </Row>
         <Btn onClick={() => handleAdd()}>범위추가</Btn>
       </Top>
+      <Row>
+        population만큼의 유저들이 betting range 안의 숫자를 랜덤으로 15회 뽑았을
+        때 한번도 뽑히지 않은 번호를 찾는다. 범위추가 버튼을 눌러 range별
+        population을 설정할 수 있다. Run을 누르면 실행된다.
+      </Row>
       <Row id="add">
         {added.map((el) => {
           return (

@@ -9,7 +9,7 @@ const Container = styled.div`
 const Row = styled.div``;
 const Input = styled.input`
   margin: 5px;
-  width: 130px;
+  width: 100px;
   font-size: 12px;
 `;
 
@@ -32,12 +32,13 @@ function Range({ setRange, el, range }) {
       <Row>
         betting range
         <Input
-          placeholder="n 이상(default 0)"
+          placeholder="n 이상(default 1)"
           onChange={(event) => low(event)}
         ></Input>
         ~
         <Input
-          placeholder="m 이하(default 9999999)"
+          style={{ width: "240px" }}
+          placeholder="m 이하(default 9999999 그대로하면 렉걸림)"
           onChange={(event) => high(event)}
         ></Input>
       </Row>
