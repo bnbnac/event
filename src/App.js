@@ -1,6 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
-import Add, { Btn } from "./Add";
-import Form from "./Form";
+import Add, { Btn } from "./components/Add";
+import Form from "./components/Form";
 
 const Container = styled.div`
   background-color: lightgray;
@@ -58,16 +59,25 @@ function App() {
     }
   };
 
+  const prerun = () => {};
+
   return (
     <Container>
-      <Form title={"회차 수"} />
-      <Add />
-      <h2>-----------------</h2>
-      <h2>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <Form title={"회차 수"} />
         <div>회차당 티켓 수 15</div>
-        <Btn onClick={() => run()}>Run</Btn>
-      </h2>
-      <h2>-----------------</h2>
+        <div>-----------------</div>
+        <Add />
+        <div>-----------------</div>
+        <div>
+          <Btn onClick={() => prerun()}>Run</Btn>
+        </div>
+      </form>
+      <div>-----------------</div>
       <h2>당첨번호 over?</h2>
     </Container>
   );

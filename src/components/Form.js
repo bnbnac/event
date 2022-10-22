@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { CYCLIC } from "./CONSTANT";
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +18,7 @@ function Form({ title }) {
       <h1>{title}</h1>
       <Input
         placeholder={title}
-        onChange={(e) => localStorage.setItem(CYCLIC, e.target.value)}
+        onChange={(e) => localStorage.setItem("cyclic", e.target.value)}
       />
     </Container>
   );
